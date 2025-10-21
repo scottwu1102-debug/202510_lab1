@@ -185,11 +185,8 @@ function handleCellClick(e) {
 	makeMove(cellIndex, 'X');
 	
 	if (gameActive && currentPlayer === 'O') {
-		const userInput = prompt("輸入延遲時間（毫秒）");
-		// 安全地解析延遲值（避免 setTimeout 的字串形式）
-		const delay = Number(userInput);
-		const safeDelay = (isNaN(delay) ? 500 : Math.max(0, Math.min(10000, Math.floor(delay))));
-		setTimeout(computerMove, safeDelay);
+		// 不顯示輸入對話框，預設延遲 1 毫秒執行電腦思考與下棋
+		setTimeout(computerMove, 1);
 	}
 }
 
