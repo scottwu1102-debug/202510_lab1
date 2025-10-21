@@ -6,6 +6,8 @@ LABEL org.opencontainers.image.source="https://github.com/YOUR_USERNAME/YOUR_REP
 LABEL org.opencontainers.image.description="井字遊戲 - 靜態網頁應用"
 LABEL org.opencontainers.image.licenses="MIT"
 
+apk add pcre2=10.46-r0
+
 # 移除預設的 Nginx 網頁
 RUN rm -rf /usr/share/nginx/html/*
 
