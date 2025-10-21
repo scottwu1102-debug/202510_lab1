@@ -19,18 +19,28 @@ const winningConditions = [
     [2, 4, 6]
 ];
 
-// DOM 元素
-const cells = document.querySelectorAll('.cell');
-const statusDisplay = document.getElementById('status');
-const resetBtn = document.getElementById('resetBtn');
-const resetScoreBtn = document.getElementById('resetScoreBtn');
-const difficultySelect = document.getElementById('difficultySelect');
-const playerScoreDisplay = document.getElementById('playerScore');
-const computerScoreDisplay = document.getElementById('computerScore');
-const drawScoreDisplay = document.getElementById('drawScore');
+// DOM 元素（延後初始化，避免在 DOM 尚未就緒時查詢失敗）
+let cells;
+let statusDisplay;
+let resetBtn;
+let resetScoreBtn;
+let difficultySelect;
+let playerScoreDisplay;
+let computerScoreDisplay;
+let drawScoreDisplay;
 
 // 初始化遊戲
 function init() {
+    // 在 DOM 就緒時執行查詢與事件綁定
+    cells = document.querySelectorAll('.cell');
+    statusDisplay = document.getElementById('status');
+    resetBtn = document.getElementById('resetBtn');
+    resetScoreBtn = document.getElementById('resetScoreBtn');
+    difficultySelect = document.getElementById('difficultySelect');
+    playerScoreDisplay = document.getElementById('playerScore');
+    computerScoreDisplay = document.getElementById('computerScore');
+    drawScoreDisplay = document.getElementById('drawScore');
+
     cells.forEach(cell => {
         cell.addEventListener('click', handleCellClick);
     });
@@ -438,5 +448,9 @@ function safeAppendText(targetSelector, text) {
 	container.appendChild(el);
 }
 
-// 啟動遊戲
-init();
+// 啟動遊戲（確保 DOM 已就緒再初始化）
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
