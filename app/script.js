@@ -120,7 +120,7 @@ function evaluateUserInput(input) {
 		}
 		while (ops.length) {
 			const o = ops.pop();
-			if o.type === 'paren') throw new Error('mismatched parentheses');
+			if (o.type === 'paren') throw new Error('mismatched parentheses');
 			out.push(o);
 		}
 
